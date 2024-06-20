@@ -20,4 +20,4 @@ In addition, the output is pushed in a Teams Space for anyone's consumption.
 You can run this script using crontab as per requirement on a server for continuous monitoring.
 
 Following is the expected post in the WebEx Teams room:
-![find_disconnected_ep_groups_output.png](find_disconnected_ep_groups_output.png)
+![find_disconnected_ep_groups_output.png](Example_Output.png)
