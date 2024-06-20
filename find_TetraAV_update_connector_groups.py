@@ -1,7 +1,6 @@
-# FOLLOWING SCRIPT WILL NEED PYTHON3.7+ which had fromisoformat attribute in datetime.datetime
 import requests
 import sys
-from time import sleep, mktime, strptime
+from time import mktime, strptime
 from datetime import datetime
 import pytz
 from prettytable import PrettyTable
@@ -14,7 +13,7 @@ Cloud = "AMP_Cloud-NAM_or_EU_or_APJC"  # NAM
 
 # PLEASE FILL IN THE GROUP GUID DETAILS BELOW
 # YOU CAN EDIT A GROUP ON AMP CONSOLE AND OBTAIN ITS GUID FROM THE ADDRESS-BAR OF THE BROWSER
-group_uuid = "1631654d-0acb-4e8c-b103-f7ae6c0534dd"
+group_uuid = "Enter_the_guid_of_the_group_you_want_to_monitor"
 
 # PLEASE FILL IN THE HOURS BELOW
 hour = 3
@@ -34,7 +33,7 @@ else:
     sys.exit("Exiting...")
 
 # QUERY URL
-url = "https://" + Third_Party_API_Client_ID + ":" + API_Key + "@" + cloud_base + "/v1/computers?limit=200&offset=0"
+url = "https://"+Third_Party_API_Client_ID+":"+API_Key+"@"+cloud_base+"/v1/computers?group_guid%5B%5D="+group_uuid+"&limit=200&offset=0"
 
 payload = {}
 files = {}
