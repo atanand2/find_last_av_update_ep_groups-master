@@ -8,9 +8,9 @@ from prettytable import PrettyTable
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 
 # PLEASE FILL YOUR API CREDENTIALS AND CLOUD DETAILS BELOW
-Third_Party_API_Client_ID = "96eb3bb060a45f56dddb"  # 00xxxx00x00000x0x0x0
-API_Key = "7314078f-ed46-4ed2-b521-28def051a9c8"  # 0000xxx0-000x-00xx-0xx0-00xx00x00x00
-Cloud = "APJC"  # NAM
+Third_Party_API_Client_ID = "Your-AMP_Third_Party_API_Client_ID"  # 00xxxx00x00000x0x0x0
+API_Key = "Your-AMP_API_Key"  # 0000xxx0-000x-00xx-0xx0-00xx00x00x00
+Cloud = "AMP_Cloud-NAM_or_EU_or_APJC"  # NAM
 
 # PLEASE FILL IN THE GROUP GUID DETAILS BELOW
 # YOU CAN EDIT A GROUP ON AMP CONSOLE AND OBTAIN ITS GUID FROM THE ADDRESS-BAR OF THE BROWSER
@@ -29,7 +29,8 @@ elif Cloud == "EU" or Cloud == "eu" or Cloud == "Eu":
 elif isinstance(hour, int) and 1 <= hour <= 24:
     pass
 else:
-    print("ERROR: AMP Cloud or Requested Hours incorrect. Please Enter Correct Region for AMP Cloud: NAM/EU/APJC. or Hours beteen 1 to 24")
+    print(
+        "ERROR: AMP Cloud or Requested Hours incorrect. Please Enter Correct Region for AMP Cloud: NAM/EU/APJC. or Hours beteen 1 to 24")
     sys.exit("Exiting...")
 
 # QUERY URL
@@ -61,7 +62,8 @@ for item in range(0, len(jsondata['data'])):
     lseen.append(jsondata['data'][item].get("last_seen"))
     if 'updated_at' in jsondata['data'][item].get("av_update_definitions"):
         avupdate.append(
-            datetime.strptime(jsondata['data'][item].get("av_update_definitions").get('updated_at'), '%Y-%m-%dT%H:%M:%S%z').strftime('%Y-%m-%dT%H:%M:%SZ'))
+            datetime.strptime(jsondata['data'][item].get("av_update_definitions").get('updated_at'),
+                              '%Y-%m-%dT%H:%M:%S%z').strftime('%Y-%m-%dT%H:%M:%SZ'))
     else:
         avupdate.append(
             datetime.strptime(jsondata['data'][item].get("last_seen"),
@@ -82,12 +84,15 @@ while index < len(avupdate):
     # FOLLOWING IS WHERE YOU SPECIFY THE HOURS AGO FOR LASTSEEN
     if hours < hour:
         # CONVERTING THE LAST SEEN TIME INTO PREFERRED TIMEZONE
-        server[host[index]] = (str(time1.astimezone(pytz.timezone('Asia/Kolkata')).strftime('%d-%m-%Y %I:%M%p')) + " IST", datetime.fromisoformat(lseen[index]).astimezone(pytz.timezone('Asia/Kolkata')).strftime('%d-%m-%Y %I:%M%p %Z'))
+        server[host[index]] = (
+        str(time1.astimezone(pytz.timezone('Asia/Kolkata')).strftime('%d-%m-%Y %I:%M%p')) + " IST",
+        datetime.fromisoformat(lseen[index]).astimezone(pytz.timezone('Asia/Kolkata')).strftime('%d-%m-%Y %I:%M%p %Z'))
     index = index + 1
 
 # FORMATING THE OUTPUT IN MARKDOWN FOR TEAMS DISPLAY
 if len(server) > 0:
-    message = (str(len(server)) + " servers has updated the Tetra Definition within last {} hour in the Test Group.".format(hour))
+    message = (str(len(
+        server)) + " servers has updated the Tetra Definition within last {} hour in the Test Group.".format(hour))
 
     tab = PrettyTable(['Hostname', 'Last AV Update', 'Last Seen'])
     for key1, (last_av_update, last_seen) in server.items():
