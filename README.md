@@ -14,7 +14,7 @@ This manual effort needs to be eliminated.
 
 
 ### Solution
-Using the /v1/computers AMP API, this script is created to continuously monitor and find an incremented hostname in AV last updated by requested hours within a specific group.
+Using the /v1/computers AMP API, this script is created to continuously monitor and find the hostname by AV Definitions last updated and Last Seen by requested hours within a specific group.
 
 In addition, the output is pushed in a Teams Space for anyone's consumption.
 You can run this script using crontab as per requirement on a server for continuous monitoring.
